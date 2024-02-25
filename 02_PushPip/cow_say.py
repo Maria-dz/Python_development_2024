@@ -9,9 +9,6 @@ if __name__ == "__main__":
     #message – a string to wrap in the text bubble
     cow_parser.add_argument('--message', default="", type=str)
 
-    #cow='default' – the name of the cow (valid names from list_cows)
-    cow_parser.add_argument('--cow', default="default", type=str)
-
     #eyes=Option.eyes – A custom eye string
     cow_parser.add_argument('-e', '--eyes', default=cowsay.Option.eyes)
 
@@ -44,14 +41,24 @@ if __name__ == "__main__":
     #parsing all income arguments
     args = cow_parser.parse_args()
 
+    #default params
+    cow = "default"
+    cowfile = None
+    wrap_text = True
+    preset = None
+
+    if args.cowfile:
+        if  "/" in args.cowfile:
+            file = args.cowfile
+        else:
+            cow = args.cowfile
+    
     if args.list:
         print(cowsay.list_cows())
     else:
-        wrap_text = True
         if args.wrap_text:
             wrap_text = False
         
-        preset = None
         if args.b:
             preset = "b"
         elif args.d:
@@ -69,5 +76,5 @@ if __name__ == "__main__":
         elif args.y:
             preset = "y"
     
-        print(cowsay.cowsay(message=args.message, cow=args.cow, preset=preset, eyes=args.eyes, tongue=args.tongue, width=args.width,
-                  wrap_text=wrap_text, cowfile=args.cowfile))
+        print(cowsay.cowsay(message=args.message, cow=cow, preset=preset, eyes=args.eyes, tongue=args.tongue, width=args.width,
+                  wrap_text=wrap_text, cowfile=cowfile))
