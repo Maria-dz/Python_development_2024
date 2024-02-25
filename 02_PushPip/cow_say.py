@@ -6,9 +6,7 @@ if __name__ == "__main__":
 
     cow_parser = argparse.ArgumentParser()
 
-    #message – a string to wrap in the text bubble
-    cow_parser.add_argument('--message', default="", type=str)
-
+    
     #eyes=Option.eyes – A custom eye string
     cow_parser.add_argument('-e', '--eyes', default=cowsay.Option.eyes)
 
@@ -26,7 +24,7 @@ if __name__ == "__main__":
 
     #adding -l argument 
     cow_parser.add_argument('-l', '--list', action='store_true')
-
+    
     #parsing preset arguments
     cow_parser.add_argument('-b', action='store_true')
     cow_parser.add_argument('-d', action='store_true')
@@ -36,7 +34,9 @@ if __name__ == "__main__":
     cow_parser.add_argument('-t', action='store_true')
     cow_parser.add_argument('-w', action='store_true')
     cow_parser.add_argument('-y', action='store_true')
-
+   
+    #message – a string to wrap in the text bubble
+    cow_parser.add_argument("custom_message", nargs='*', default=[' '])
 
     #parsing all income arguments
     args = cow_parser.parse_args()
@@ -46,6 +46,7 @@ if __name__ == "__main__":
     cowfile = None
     wrap_text = True
     preset = None
+    custom_message = ' '.join(args.custom_message)
 
     if args.cowfile:
         if  "/" in args.cowfile:
@@ -76,5 +77,5 @@ if __name__ == "__main__":
         elif args.y:
             preset = "y"
     
-        print(cowsay.cowsay(message=args.message, cow=cow, preset=preset, eyes=args.eyes, tongue=args.tongue, width=args.width,
+        print(cowsay.cowsay(message=custom_message, cow=cow, preset=preset, eyes=args.eyes, tongue=args.tongue, width=args.width,
                   wrap_text=wrap_text, cowfile=cowfile))
