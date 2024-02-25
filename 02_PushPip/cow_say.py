@@ -17,7 +17,7 @@ if __name__ == "__main__":
     cow_parser.add_argument('-W', '--width', default=40, type=int)
 
     #wrap_text=True – Whether text should be wrapped in the bubble
-    cow_parser.add_argument('-n', '--wrap_text')
+    cow_parser.add_argument('-n', '--wrap_text', action = 'store_true')
 
     #cowfile=None – A custom string representing a cow
     cow_parser.add_argument('-f', '--cowfile', default=None)
@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
     if args.cowfile:
         if  "/" in args.cowfile:
-            file = args.cowfile
+            cowfile = args.cowfile
         else:
             cow = args.cowfile
     
