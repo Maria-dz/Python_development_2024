@@ -1,6 +1,7 @@
 import argparse
 from random import randint 
 from urllib import request
+import cowsay
 
 
 def ask(prompt, valid=None):
