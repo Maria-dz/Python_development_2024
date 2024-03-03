@@ -1,23 +1,40 @@
 import argparse
+import cowsay
 from random import randint 
 from urllib import request
-import cowsay
+from io import StringIO
 
+
+custom_cow = cowsay.read_dot_cow(StringIO("""
+                                          
+$the_cow = <<EOC;
+  $thoughts
+    $thoughts
+
+    -------       -------
+   |       |     |       |
+   |  000  |     |  000  |
+   |  000  |     |  000  |
+   |  000  |     |  000  |
+   |       |     |       |
+    -------       -------
+              ^
+EOC
+"""
+                                          )
+                                )
 
 def ask(prompt, valid=None):
     if valid:
         while True:
-          cow = choose_random_cow()
-          print(cowsay.cowsay(message=prompt, cow=cow))
+          print(cowsay.cowsay(message=prompt, cowfile=custom_cow))
           inp_word = input()
           if inp_word in valid:
               break
           else:
-              cow = choose_random_cow()
-              print(cowsay.cowsay(message="Ваше слово должно быть из списка слов, повторите попытку", cow=cow))
+              print(cowsay.cowsay(message="Ваше слово должно быть из списка слов, повторите попытку", cowfile=custom_cow))
     else:
-        cow = choose_random_cow()
-        print(cowsay.cowsay(message=prompt, cow=cow))
+        print(cowsay.cowsay(message=prompt, cowfile=custom_cow))
         inp_word = input()
     return inp_word
     
@@ -54,7 +71,7 @@ def gameplay(ask, inform, words):
     len_w = len(words)-1
     chosen_index = randint(0, len_w)
     chosen_word = words[chosen_index]
-
+    print(chosen_word)
     count_of_guesses = 0
     
     #asking player to have a guess
