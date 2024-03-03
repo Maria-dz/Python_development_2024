@@ -6,12 +6,15 @@ from urllib import request
 def ask(prompt, valid=None):
     if valid:
         while True:
-          print(prompt, )
+          print(prompt)
           inp_word = input()
           if inp_word in valid:
               break
           else:
               print("Ваше слово должно быть из списка слов, повторите попытку")
+    else:
+        print(prompt)
+        inp_word = input()
     return inp_word
     
 
