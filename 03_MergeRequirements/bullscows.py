@@ -7,20 +7,31 @@ import cowsay
 def ask(prompt, valid=None):
     if valid:
         while True:
-          print(prompt)
+          cow = choose_random_cow()
+          print(cowsay.cowsay(message=prompt, cow=cow))
           inp_word = input()
           if inp_word in valid:
               break
           else:
-              print("Ваше слово должно быть из списка слов, повторите попытку")
+              cow = choose_random_cow()
+              print(cowsay.cowsay(message="Ваше слово должно быть из списка слов, повторите попытку", cow=cow))
     else:
-        print(prompt)
+        cow = choose_random_cow()
+        print(cowsay.cowsay(message=prompt, cow=cow))
         inp_word = input()
     return inp_word
     
+def choose_random_cow():
+    all_cows = cowsay.list_cows()
+    len_cows = len(all_cows)-1
+    chosen_index = randint(0, len_cows)
+    chosen_cow = all_cows[chosen_index]
+    return chosen_cow
+
 
 def inform(format_string, bulls, cows):
-    print(format_string.format(bulls, cows))
+    cow = choose_random_cow()
+    print(cowsay.cowsay(message=format_string.format(bulls, cows), cow=cow))
 
     
 def bullscows(guess, secret):
