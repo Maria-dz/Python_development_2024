@@ -84,7 +84,7 @@ class CowSay(cmd.Cmd):
         if words[-1] == "-e":
             return [eye.eyes for eye in cowsay.COW_OPTIONS.values()]
         elif  words[-1] == "-T":
-            return [tongue.tongue for tongue in cowsay.COW_OPTIONS.values()]
+            return [tongue.tongue for tongue in cowsay.COW_OPTIONS.values()] + ['UU', 'W', 'WW']
         elif words[-1] == "-f":
             return cowsay.list_cows()
         else:
