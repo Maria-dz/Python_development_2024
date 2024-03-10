@@ -79,7 +79,7 @@ class CowSay(cmd.Cmd):
         print(cowsay.cowthink(message=message, cow=cow, eyes=eyes, tongue=tongue))
     
     def complete_cowsay(self, text, line, begidx, endidx):
-        words = (line[:endidx]).split()
+        words = shlex.split(line[:endidx])
 
         if words[-1] == "-e":
             return [eye.eyes for eye in cowsay.COW_OPTIONS.values()]
@@ -91,7 +91,7 @@ class CowSay(cmd.Cmd):
             return None
 
     def complete_cowthink(self, text, line, begidx, endidx):
-        words = (line[:endidx]).split()
+        words = shlex.split(line[:endidx])
 
         if words[-1] == "-e":
             return [eye.eyes for eye in cowsay.COW_OPTIONS.values()]
