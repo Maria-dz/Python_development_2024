@@ -78,6 +78,30 @@ class CowSay(cmd.Cmd):
 
         print(cowsay.cowthink(message=message, cow=cow, eyes=eyes, tongue=tongue))
     
+    def complete_cowsay(self, text, line, begidx, endidx):
+        words = (line[:endidx]).split()
+
+        if words[-1] == "-e":
+            return [eye.eyes for eye in cowsay.COW_OPTIONS.values()]
+        elif  words[-1] == "-T":
+            return [tongue.tongue for tongue in cowsay.COW_OPTIONS.values()]
+        elif words[-1] == "-f":
+            return cowsay.list_cows()
+        else:
+            return None
+
+    def complete_cowthink(self, text, line, begidx, endidx):
+        words = (line[:endidx]).split()
+
+        if words[-1] == "-e":
+            return [eye.eyes for eye in cowsay.COW_OPTIONS.values()]
+        elif  words[-1] == "-T":
+            return [tongue.tongue for tongue in cowsay.COW_OPTIONS.values()]
+        elif words[-1] == "-f":
+            return cowsay.list_cows()
+        else:
+            return None
+
     # functions for cmd usage, from cmd documentation
     def do_record(self, arg):
         'Save future commands to filename:  RECORD cows_thoughts.cmd'
